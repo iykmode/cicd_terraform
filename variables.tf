@@ -4,15 +4,9 @@ variable "profile" {
 
 }
 
-variable "region-main" {
+variable "key_name" {
   type    = string
-  default = "us-east-1"
-
-}
-
-variable "external_ip" {
-  type    = string
-  default = "0.0.0.0/0"
+  default = "jenkins"
 
 }
 
@@ -22,8 +16,17 @@ variable "instance-type" {
 
 }
 
-variable "webserver-port" {
-  type    = number
-  default = 80
+variable "subnet_id" {
+  type    = string
+  default = "subnet-070953972b87f351a"
+}
 
+variable "security_grp" {
+  type    = string
+  default = "sg-0f557aa1cebfd5061"
+}
+
+variable "ami_id" {
+  type    = string
+  default = "ami-03f295fecc39988fc"
 }
