@@ -18,12 +18,12 @@ variable "instance-type" {
 
 variable "subnet_id" {
   type    = string
-  default = "subnet-070953972b87f351a"
+  default = "subnet-07f7f49a9967db4a2"
 }
 
 variable "security_grp" {
   type    = string
-  default = "sg-0f557aa1cebfd5061"
+  default = "sg-0aa03a28b6021155d"
 }
 
 variable "ami_id" {
