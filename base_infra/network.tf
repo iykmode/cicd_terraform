@@ -1,4 +1,4 @@
-#Create VPC in us-east-1
+#Create VPC in eu-west-1
 resource "aws_vpc" "vpc_main" {
   # provider             = aws.region-main
   cidr_block           = "10.0.0.0/16"
@@ -10,7 +10,7 @@ resource "aws_vpc" "vpc_main" {
 
 }
 
-#Create IGW in us-east-1
+#Create IGW in eu-west-1
 resource "aws_internet_gateway" "igw" {
   # provider = aws.region-main
   vpc_id = aws_vpc.vpc_main.id
@@ -23,7 +23,7 @@ data "aws_availability_zones" "azs" {
 }
 
 
-#Create subnet #1 in us-east-1
+#Create subnet #1 in eu-west-1
 resource "aws_subnet" "jenkins-subnet" {
   # provider          = aws.region-main
   availability_zone = element(data.aws_availability_zones.azs.names, 0)
@@ -32,7 +32,7 @@ resource "aws_subnet" "jenkins-subnet" {
 }
 
 
-#Create subnet #2  in us-east-1
+#Create subnet #2 in eu-west-1
 resource "aws_subnet" "app-subnet" {
   # provider          = aws.region-main
   vpc_id            = aws_vpc.vpc_main.id
@@ -40,7 +40,7 @@ resource "aws_subnet" "app-subnet" {
   cidr_block        = "10.0.2.0/24"
 }
 
-#Create route table in us-east-1
+#Create route table in eu-west-1
 resource "aws_route_table" "internet_route" {
   # provider = aws.region-main
   vpc_id = aws_vpc.vpc_main.id
@@ -48,10 +48,7 @@ resource "aws_route_table" "internet_route" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
-  # route {
-  #   cidr_block                = "192.168.1.0/24"
-  #   vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
-  # }
+
   lifecycle {
     ignore_changes = all
   }
@@ -62,9 +59,6 @@ resource "aws_route_table" "internet_route" {
 
 #Overwrite default route table of VPC(Master) with our route table entries
 resource "aws_main_route_table_association" "set-public-subnet-route-table" {
-  # provider       = aws.region-main
-  # vpc_id         = aws_vpc.vpc_main.id
-  vpc_id = aws_vpc.vpc_main.id
-  # subnet_id      = aws_subnet.jenkins-subnet.id
+  vpc_id         = aws_vpc.vpc_main.id
   route_table_id = aws_route_table.internet_route.id
 }

@@ -45,9 +45,9 @@ resource "aws_lb_listener" "jenkins-listener-http" {
 }
 
 
-resource "aws_lb_target_group_attachment" "webserver-attach" {
-  #   provider         = aws.region-main
-  target_group_arn = aws_lb_target_group.app-lb-tg.arn
-  target_id        = aws_instance.jenkins.id
-  port             = var.webserver-port
-}
+# resource "aws_lb_target_group_attachment" "webserver-attach" {
+#   #   provider         = aws.region-main
+#   target_group_arn = aws_lb_target_group.app-lb-tg.arn
+#   target_id        = aws_instance.jenkins.id
+#   port             = var.webserver-port
+# }

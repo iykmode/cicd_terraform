@@ -8,7 +8,7 @@ resource "aws_iam_instance_profile" "tech-test-profile" {
   role = data.aws_iam_role.tech_test_role.name
 }
 
-#Create and bootstrap EC2 in us-east-1
+#Create and bootstrap EC2 in eu-west-1
 resource "aws_instance" "jenkins" {
   # provider                    = aws.region-main
   # ami                         = "ami-0532899d46335ff25"
