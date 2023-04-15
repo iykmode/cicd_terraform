@@ -49,6 +49,6 @@ variable "webserver-port" {
 
 variable "nginx_version" {
   type    = string
-  default = "1.20.1"
+  default = "1"
 
 }

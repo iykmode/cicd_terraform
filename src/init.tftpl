@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo amazon-linux-extras install nginx${nginx_version} -y
+sudo systemctl enable nginx --now
+
+# Update index.html
+sudo rm /usr/share/nginx/html/index.html && \
+cat >/usr/share/nginx/html/index.html <<'EOF'
+${file("src/app.html")}
+EOF
+
+# Restart NGINX
+sudo systemctl restart nginx

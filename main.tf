@@ -1,21 +1,14 @@
-data "template_file" "init" {
-  template = file("src/init.tpl")
-  vars = {
-    nginx_version = var.nginx_version
-  }
-}
-
 resource "aws_instance" "webserver" {
   # provider                    = aws.region-main
   # ami                         = "ami-0532899d46335ff25"
   ami           = var.ami_id
   instance_type = var.instance-type
-  user_data     = data.template_file.init.rendered
-  #   user_data                   = templatefile(
-  #     "src/init.tpl",
-  #     {
-  #         nginx_version = var.nginx_version
-  #     })
+  user_data                   = templatefile(
+    "src/init.tftpl",
+    {
+        nginx_version = var.nginx_version
+    })
+  user_data_replace_on_change = true
   key_name                    = var.key_name
   associate_public_ip_address = true
   vpc_security_group_ids      = [var.security_grp]
