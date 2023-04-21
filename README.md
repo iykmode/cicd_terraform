@@ -44,5 +44,5 @@ Then update your repo and see Jenkins and Terraform in action.
 
 ### URL to Access Static Webpage via the Application LB's DNS Name
 
-Please not that the URL below is for this deployment:
+Please not that the URL below is for this deployment and it may not be available at the time of your accessing it because the infrastructure has been intentionally destroyed to save accumulating cloud costs.:
 http://jenkins-lb-352486350.eu-west-1.elb.amazonaws.com/
